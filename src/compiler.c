@@ -1,5 +1,4 @@
 #include <ctype.h>
-#include <math.h>
 #include <stdio.h>
 
 #define MAX_TOKENS 100
