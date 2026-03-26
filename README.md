@@ -1,3 +1,8 @@
 # Monacle
 
 Simple compiler i'll be programming.
+
+TODO:
+
+Add Parser -- Pretty hard
+Add more variables -- Do after parser
