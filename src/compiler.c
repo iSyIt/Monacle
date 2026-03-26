@@ -1,4 +1,5 @@
 #include <ctype.h>
+#include <math.h>
 #include <stdio.h>
 
 #define MAX_TOKENS 100
@@ -37,6 +38,7 @@ void Lexer(const char *input, int *count, Token *TokensReturned) {
         else if (c == '=') {
             Token t;
             t.type = TOKEN_ASSIGN;
+            t.value = 0;
 
             TokensReturned[*count] = t;
             (*count)++;
@@ -44,6 +46,7 @@ void Lexer(const char *input, int *count, Token *TokensReturned) {
         else if (c == '+') {
             Token t;
             t.type = TOKEN_PLUS;
+            t.value = 0;
             TokensReturned[*count] = t;
             (*count)++;
 
@@ -52,6 +55,7 @@ void Lexer(const char *input, int *count, Token *TokensReturned) {
         else if (c == '-') {
             Token t;
             t.type = TOKEN_MINUS;
+            t.value = 0;
             TokensReturned[*count] = t;
             (*count)++;
 
@@ -62,7 +66,6 @@ void Lexer(const char *input, int *count, Token *TokensReturned) {
 }
 
 
-
 int main() {
     int count = 0;
     Token backTokens[MAX_TOKENS];
@@ -70,6 +73,6 @@ int main() {
     Lexer(input, &count, backTokens);
     // Print the Array
     for (int i = 0; i<count; i++) {
-        printf("Value: %d\nType: %d\n", backTokens[i].value, backTokens[i].type);
+        printf("Value: %d\nType: %d\n\n", backTokens[i].value, backTokens[i].type);
     }
 }
