@@ -1,6 +1,8 @@
 #include <ctype.h>
 #include <stdio.h>
 
+#define MAX_TOKENS 100
+
 typedef enum {
     TOKEN_PLUS,
     TOKEN_MINUS,
@@ -13,8 +15,8 @@ typedef struct {
     int value;
 } Token;
 
-void tokenizater(const char *input) {
-    // For loop for the input
+void Lexer(const char *input, int *count, Token *TokensReturned) { 
+    // For loop for the input  *input is just the "char string"  *count is just where the count is updated  *TokensReturned, obviously is where the Tokens are returned
     for (int i = 0; input[i] != '\0'; i++) {
         char c = input[i];
 
@@ -24,37 +26,50 @@ void tokenizater(const char *input) {
                 num = num * 10 + (input[i] - '0');
                 i++;
             }
-            i--;
+         i--;
             Token t;
             t.type = TOKEN_NUMBER;
             t.value = num;
-            
-            printf("NUMBER: %d\n", t.value);
+
+            TokensReturned[*count] = t;
+            (*count)++;
         }
         else if (c == '=') {
             Token t;
             t.type = TOKEN_ASSIGN;
 
-            printf("EQUAL_SIGN\n");
+            TokensReturned[*count] = t;
+            (*count)++;
         }
         else if (c == '+') {
             Token t;
             t.type = TOKEN_PLUS;
+            TokensReturned[*count] = t;
+            (*count)++;
 
             printf("PLUS_SIGN\n");
         }
         else if (c == '-') {
             Token t;
             t.type = TOKEN_MINUS;
+            TokensReturned[*count] = t;
+            (*count)++;
 
-            printf("MINUS_SIGN\n");
         }
 
         
     }
 }
 
+
+
 int main() {
+    int count = 0;
+    Token backTokens[MAX_TOKENS];
     char *input = "5-3=10";
-    tokenizater(input);
+    Lexer(input, &count, backTokens);
+    // Print the Array
+    for (int i = 0; i<count; i++) {
+        printf("Value: %d\nType: %d\n", backTokens[i].value, backTokens[i].type);
+    }
 }
