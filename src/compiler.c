@@ -1,5 +1,6 @@
 #include <ctype.h>
 #include <stdio.h>
+#include <unistd.h>
 
 #define MAX_TOKENS 100
 
@@ -65,13 +66,20 @@ void Lexer(const char *input, int *count, Token *TokensReturned) {
 }
 
 
-int main() {
-    int count = 0;
-    Token backTokens[MAX_TOKENS];
-    char *input = "5-3=10";
-    Lexer(input, &count, backTokens);
-    // Print the Array
-    for (int i = 0; i<count; i++) {
-        printf("Value: %d\nType: %d\n\n", backTokens[i].value, backTokens[i].type);
-    }
+int main(int argc, char* argv[]) {
+    // int count = 0;
+    // Token backTokens[MAX_TOKENS];
+    // char *input = "5-3=10";
+    // Lexer(input, &count, backTokens);
+    // // Print the Array
+    // for (int i = 0; i<count; i++) {
+    //     printf("Value: %d\nType: %d\n\n", backTokens[i].value, backTokens[i].type);
+    // }
+
+    char *cli_input = argv[1];
+    char *cli_output = argv[2];
+
+    FILE* file_pointer;
+
+    file_pointer = fopen(cli_input, "r");
 }
