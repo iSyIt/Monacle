@@ -75,11 +75,19 @@ int main(int argc, char* argv[]) {
     // for (int i = 0; i<count; i++) {
     //     printf("Value: %d\nType: %d\n\n", backTokens[i].value, backTokens[i].type);
     // }
-
+    if (argc < 2) {
+        fprintf(stderr, "Bro ur legit dumb asf. It's %s <input>\n", argv[0]);
+        return 1;
+    }
     char *cli_input = argv[1];
     char *cli_output = argv[2];
 
-    FILE* file_pointer;
 
-    file_pointer = fopen(cli_input, "r");
+    char output_file;
+    FILE *file_pointer = fopen(cli_input, "r");
+    while ((output_file = fgetc(file_pointer)) != EOF) {
+        printf("%c", output_file);
+    }
+
+
 }
