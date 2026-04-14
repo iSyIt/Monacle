@@ -1,8 +1,8 @@
-# Monacle
+= Monacle
 
 Simple compiler i'll be programming.
 
-TODO:
+== TODO:
 
 Add Parser -- Pretty hard
 Add more variables -- Do after parser
