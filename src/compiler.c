@@ -83,6 +83,7 @@ AbstractTreeNode* Parser(Token MainToken[], int Amount) { // MainToken is just t
     if (MainToken[CursorToToken].type != TOKEN_NUMBER) {
         tree->left->type = MainToken[CursorToToken].type;
     }
+    return tree;
 }
 
 int main(int argc, char* argv[]) {
