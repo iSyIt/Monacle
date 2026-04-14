@@ -18,7 +18,7 @@ typedef struct {
 
 // This is genuinely hard to explain, but basically, we are basically making another kind of Token struct, but this one points to what is below it, to know the order.
 
-typedef struct {
+typedef struct AbstractTreeNode { // Basically, this definition at the start is to give it a "real" name, and the second one is the typedef shortcut.
   TokenType type;
   int value; // Only used for numbers
   struct AbstractTreeNode* left;
@@ -77,34 +77,51 @@ void Lexer(const char *input, int *count, Token *TokensReturned) {
         
     }
 }
-
+AbstractTreeNode* Parser(Token MainToken[], int Amount) { // MainToken is just the TokensReturned from the Lexer, and Amount is just how many tokens there are inside.
+    int CursorToToken = 0;
+    AbstractTreeNode* tree;
+    if (MainToken[CursorToToken].type != TOKEN_NUMBER) {
+        tree->left->type = MainToken[CursorToToken].type;
+    }
+}
 
 int main(int argc, char* argv[]) {
-    // int count = 0;
-    // Token backTokens[MAX_TOKENS];
-    // char *input = "5-3=10";
-    // Lexer(input, &count, backTokens);
-    // // Print the Array
-    // for (int i = 0; i<count; i++) {
-    //     printf("Value: %d\nType: %d\n\n", backTokens[i].value, backTokens[i].type);
+    int count = 0;
+    Token backTokens[MAX_TOKENS];
+    char *input = "5-3=10";
+    Lexer(input, &count, backTokens);
+    Parser(backTokens, count);
+    
+    // if (argc < 3) {
+    //     fprintf(stderr, "Usage: %s <input> <output>\n", argv[0]);
+    //     return 1;
     // }
-    if (argc < 3) {
-        fprintf(stderr, "Bro ur legit dumb asf. It's %s <input>\n", argv[0]); // Probably will change this later lol
-        return 1;
-    }
-    char *cli_input = argv[1];
-    char *cli_output = argv[2];
 
+    // char *cli_input = argv[1];
+    // char *cli_output = argv[2];
 
-    int output_file;
-    FILE *file_pointer = fopen(cli_input, "r");
+    // FILE *in = fopen(cli_input, "r");
+    // if (!in) {
+    //     perror("fopen input failed");
+    //     return 1;
+    // }
 
-    if (!file_pointer) {
-      perror("fopen failed reason");
-    }
-    while ((output_file = fgetc(file_pointer)) != EOF) {
-        fprintf(f, "%c", output_file);
-    }
+    // FILE *out = fopen(cli_output, "w");
+    // if (!out) {
+    //     perror("fopen output failed");
+    //     fclose(in);
+    //     return 1;
+    // }
+
+    // int ch;
+    // while ((ch = fgetc(in)) != EOF) {
+    //     fputc(ch, out);
+    // }
+
+    // fclose(in);
+    // fclose(out);
+
+    // return 0;
 
 
 }
