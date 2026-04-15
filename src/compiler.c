@@ -1,6 +1,7 @@
 #include <ctype.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <stdlib.h>
 
 #define MAX_TOKENS 100
 
@@ -77,12 +78,20 @@ void Lexer(const char *input, int *count, Token *TokensReturned) {
         
     }
 }
+
+AbstractTreeNode* TreeHelper(TokenType node_type, int value) {
+    AbstractTreeNode* Tree = malloc(sizeof(AbstractTreeNode));
+    Tree->type = node_type;
+    Tree->value = value;
+    Tree->left = NULL;
+    Tree->right = NULL;
+    return Tree;
+}
+
 AbstractTreeNode* Parser(Token MainToken[], int Amount) { // MainToken is just the TokensReturned from the Lexer, and Amount is just how many tokens there are inside.
     int CursorToToken = 0;
     AbstractTreeNode* tree;
-    if (MainToken[CursorToToken].type != TOKEN_NUMBER) {
-        tree->left->type = MainToken[CursorToToken].type;
-    }
+
     return tree;
 }
 
