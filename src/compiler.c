@@ -97,7 +97,10 @@ AbstractTreeNode* Parser(Token MainToken[], int Amount) { // MainToken is just t
     CursorToToken++;
 
     while (CursorToToken < Amount) {
-      
+        AbstractTreeNode* new_tree = TreeHelper(MainToken[CursorToToken].type, MainToken[CursorToToken].value);
+        new_tree->left = tree;
+        new_tree->right = 
+        
     }
     return tree;
 }
