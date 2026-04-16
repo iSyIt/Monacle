@@ -90,8 +90,15 @@ AbstractTreeNode* TreeHelper(TokenType node_type, int value) {
 
 AbstractTreeNode* Parser(Token MainToken[], int Amount) { // MainToken is just the TokensReturned from the Lexer, and Amount is just how many tokens there are inside.
     int CursorToToken = 0;
-    AbstractTreeNode* tree;
+    if (MainToken[CursorToToken].type != TOKEN_NUMBER) {
+      printf("Expression has to start with a number, got %d instead.", MainToken[CursorToToken].type);
+    }
+    AbstractTreeNode* tree = TreeHelper(MainToken[CursorToToken].type, MainToken[CursorToToken].value);
+    CursorToToken++;
 
+    while (CursorToToken < Amount) {
+      
+    }
     return tree;
 }
 
