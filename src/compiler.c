@@ -28,7 +28,7 @@ typedef struct AbstractTreeNode { // Basically, this definition at the start is 
 
 
 
-void Lexer(const char *input, int *count, Token *TokensReturned) { 
+void Lexer(const char *input, int *count, Token *tokensReturned) { 
     // For loop for the input  *input is just the "char string"  *count is just where the count is updated  *TokensReturned, obviously is where the Tokens are returned
     for (int i = 0; input[i] != '\0'; i++) {
         char c = input[i];
@@ -46,7 +46,7 @@ void Lexer(const char *input, int *count, Token *TokensReturned) {
             t.type = TOKEN_NUMBER;
             t.value = num;
 
-            TokensReturned[*count] = t;
+            tokensReturned[*count] = t;
             (*count)++;
         }
         else if (c == '=') {
@@ -54,14 +54,14 @@ void Lexer(const char *input, int *count, Token *TokensReturned) {
             t.type = TOKEN_ASSIGN;
             t.value = 0;
 
-            TokensReturned[*count] = t;
+            tokensReturned[*count] = t;
             (*count)++;
         }
         else if (c == '+') {
             Token t;
             t.type = TOKEN_PLUS;
             t.value = 0;
-            TokensReturned[*count] = t;
+            tokensReturned[*count] = t;
             (*count)++;
 
             printf("PLUS_SIGN\n");
@@ -70,7 +70,7 @@ void Lexer(const char *input, int *count, Token *TokensReturned) {
             Token t;
             t.type = TOKEN_MINUS;
             t.value = 0;
-            TokensReturned[*count] = t;
+            tokensReturned[*count] = t;
             (*count)++;
 
         }
@@ -95,13 +95,12 @@ AbstractTreeNode* Parser(Token MainToken[], int Amount) { // MainToken is just t
     }
     AbstractTreeNode* tree = TreeHelper(MainToken[CursorToToken].type, MainToken[CursorToToken].value);
     CursorToToken++;
-
-    while (CursorToToken < Amount) {
-        AbstractTreeNode* new_tree = TreeHelper(MainToken[CursorToToken].type, MainToken[CursorToToken].value);
-        new_tree->left = tree;
-        new_tree->right = 
-        
-    }
+    AbstractTreeNode* operatorTree = TreeHelper(MainToken[CursorToToken].type, MainToken[CursorToToken].value);
+    CursorToToken++;
+    AbstractTreeNode* next_tree = TreeHelper(MainToken[CursorToToken].type, MainToken[CursorToToken].value);
+    operatorTree->left = tree;
+    operatorTree->right = next_tree;
+    tree = operatorTree;
     return tree;
 }
 
