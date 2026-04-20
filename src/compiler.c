@@ -104,12 +104,33 @@ AbstractTreeNode* Parser(Token MainToken[], int Amount) { // MainToken is just t
     return tree;
 }
 
+void DebugTree(AbstractTreeNode* tree) {
+  if (!tree) {return;}
+
+  printf("Node type: %d\nvalue %d\n\n", tree->type, tree->value);
+
+  DebugTree(tree->left);
+  DebugTree(tree->right);
+}
+int Evaluator(AbstractTreeNode* tree) {
+  if (tree->type == TOKEN_MINUS) {
+    return (tree->left->value)-(tree->right->value);
+  }
+  if (tree->type == TOKEN_PLUS) {
+    return (tree->left->value)+(tree->right->value);
+  }
+}
+
+
 int main(int argc, char* argv[]) {
     int count = 0;
     Token backTokens[MAX_TOKENS];
-    char *input = "5-3=10";
+    char *input = "69-72";
     Lexer(input, &count, backTokens);
-    Parser(backTokens, count);
+    AbstractTreeNode* ReturnedParser = Parser(backTokens, count);
+    DebugTree(ReturnedParser);
+
+    printf("Result: %d\n", Evaluator(ReturnedParser));
     
     // if (argc < 3) {
     //     fprintf(stderr, "Usage: %s <input> <output>\n", argv[0]);
